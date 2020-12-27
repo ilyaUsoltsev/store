@@ -1,13 +1,13 @@
 import React from "react";
 import sections from "../../directory.data";
-import { IState } from "../../models/state";
+import { IStateDirectory } from "../../models/state";
 import MenuItem from "../menu-item/menu-item";
 import "./directory.scss";
 
 interface IProps {}
 
 class Directory extends React.Component {
-  state: IState;
+  state: IStateDirectory;
   constructor(props: IProps) {
     super(props);
     this.state = {

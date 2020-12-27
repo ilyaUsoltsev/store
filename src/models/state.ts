@@ -1,5 +1,9 @@
+import { ICollection } from "./collections";
 import { ISection } from "./section";
 
-export interface IState {
+export interface IStateDirectory {
   sections: ISection[];
+}
+export interface IStateShopPage {
+  collections: ICollection[];
 }
