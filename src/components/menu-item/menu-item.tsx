@@ -1,18 +1,35 @@
 import React from "react";
 import "./menu-item.scss";
+import { withRouter } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 
-interface IProps {
-  title: string;
-  imgUrl: string;
-  size?: string;
+interface IMenuItemRouterProps {
+  title: string; // This one is coming from the router
 }
 
-function MenuItem({ title, imgUrl, size }: IProps) {
+interface IMenuItemProps extends RouteComponentProps<IMenuItemRouterProps> {
+  title: string;
+  imageUrl: string;
+  size?: string;
+  linkUrl: string;
+}
+
+function MenuItem({
+  title,
+  imageUrl,
+  size,
+  history,
+  linkUrl,
+  match,
+}: IMenuItemProps) {
   return (
-    <div className={`${size} menu-item`}>
+    <div
+      className={`${size} menu-item`}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
       <div
         className="background-image"
-        style={{ backgroundImage: `url(${imgUrl})` }}
+        style={{ backgroundImage: `url(${imageUrl})` }}
       />
       <div className="content">
         <h1 className="title">{title.toUpperCase()}</h1>
@@ -22,4 +39,4 @@ function MenuItem({ title, imgUrl, size }: IProps) {
   );
 }
 
-export default MenuItem;
+export default withRouter(MenuItem);
