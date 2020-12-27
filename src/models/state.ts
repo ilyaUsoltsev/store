@@ -7,3 +7,8 @@ export interface IStateDirectory {
 export interface IStateShopPage {
   collections: ICollection[];
 }
+
+export interface ISignInState {
+  email: string;
+  password: string;
+}
