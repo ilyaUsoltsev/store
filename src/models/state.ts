@@ -21,3 +21,10 @@ export interface IAppState {
     displayName: string;
   } | null;
 }
+
+export interface ISignUpState {
+  email: string;
+  password: string;
+  displayName: string;
+  confirmPassword: string;
+}
