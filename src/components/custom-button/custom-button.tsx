@@ -3,12 +3,17 @@ import "./custom-button.scss";
 
 interface ICustomButtonProps {
   children: any;
+  customClass?: string;
   [x: string]: any;
 }
 
-function CustomButton({ children, ...otherProps }: ICustomButtonProps) {
+function CustomButton({
+  children,
+  customClass = "",
+  ...otherProps
+}: ICustomButtonProps) {
   return (
-    <button className="custom-button" {...otherProps}>
+    <button className={`${customClass} custom-button`} {...otherProps}>
       {children}
     </button>
   );

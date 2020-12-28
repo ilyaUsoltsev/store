@@ -12,3 +12,12 @@ export interface ISignInState {
   email: string;
   password: string;
 }
+
+export interface IAppState {
+  currentUser: {
+    id: any;
+    createdAt: { seconds: number; nanoseconds: number };
+    email: string;
+    displayName: string;
+  } | null;
+}
