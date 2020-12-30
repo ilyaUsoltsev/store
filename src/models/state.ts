@@ -13,8 +13,11 @@ export interface ISignInState {
   password: string;
 }
 
-export interface IAppState {
+export interface IUserState {
   currentUser: ICurrentUser | null;
+}
+export interface ICartState {
+  hidden: boolean;
 }
 
 export interface ICurrentUser {

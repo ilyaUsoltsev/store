@@ -1,14 +1,14 @@
 import { UserActionTypes, SET_CURRENT_USER } from "./action-types";
-import { IAppState } from "./../../models/state";
+import { IUserState } from "./../../models/state";
 
-const INITIAL_STATE: IAppState = {
+const INITIAL_STATE: IUserState = {
   currentUser: null,
 };
 
 const userReducer = (
-  state: IAppState = INITIAL_STATE,
+  state: IUserState = INITIAL_STATE,
   action: UserActionTypes
-): IAppState => {
+): IUserState => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload };
