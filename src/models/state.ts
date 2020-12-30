@@ -14,12 +14,14 @@ export interface ISignInState {
 }
 
 export interface IAppState {
-  currentUser: {
-    id: any;
-    createdAt: { seconds: number; nanoseconds: number };
-    email: string;
-    displayName: string;
-  } | null;
+  currentUser: ICurrentUser | null;
+}
+
+export interface ICurrentUser {
+  id: any;
+  createdAt: { seconds: number; nanoseconds: number };
+  email: string;
+  displayName: string;
 }
 
 export interface ISignUpState {

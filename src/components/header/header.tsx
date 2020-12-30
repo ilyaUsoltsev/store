@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { connect } from "react-redux";
 import "./header.scss";
+import { IRootState } from "../../redux/root-reducer";
 
 interface IHeaderProps {
   currentUser: any;
@@ -35,4 +37,8 @@ function Header({ currentUser, signOut }: IHeaderProps) {
   );
 }
 
-export default Header;
+const mapStateToProps = (state: IRootState) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(Header);
