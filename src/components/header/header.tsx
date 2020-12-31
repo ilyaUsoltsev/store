@@ -37,7 +37,7 @@ function Header({ currentUser, signOut, hidden }: IHeaderProps) {
         )}
         <CartIcon />
       </div>
-      {hidden && <CartDropdown />}
+      {!hidden && <CartDropdown />}
     </div>
   );
 }

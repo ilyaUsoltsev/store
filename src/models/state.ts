@@ -1,4 +1,4 @@
-import { ICollection } from "./collections";
+import { ICollection, ICollectionItem } from "./collections";
 import { ISection } from "./section";
 
 export interface IStateDirectory {
@@ -18,6 +18,7 @@ export interface IUserState {
 }
 export interface ICartState {
   hidden: boolean;
+  cartItems: ICollectionItem[];
 }
 
 export interface ICurrentUser {
