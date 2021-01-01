@@ -5,6 +5,7 @@ import { IRootState } from "../../redux/root-reducer";
 import { selectCollection } from "../../redux/collection/collection.selector";
 import { connect } from "react-redux";
 import { ICollection } from "../../models/collections";
+import CollectionItem from "../../components/collection-item/collection-item";
 
 interface MatchParams {
   collectionId: string;
@@ -16,7 +17,12 @@ interface ICollectionPage extends RouteComponentProps<MatchParams> {
 const CollectionPage = ({ collection }: ICollectionPage) => {
   return (
     <div className="collection-page">
-      <h2>Collection Page {collection?.title}</h2>
+      <h2 className="title">{collection?.title}</h2>
+      <div className="items">
+        {collection!.items.map((item) => (
+          <CollectionItem item={item} />
+        ))}
+      </div>
     </div>
   );
 };
