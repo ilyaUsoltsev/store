@@ -48,7 +48,7 @@ class App extends React.Component<IAppProps> {
         <Header signOut={() => auth.signOut()} />
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
