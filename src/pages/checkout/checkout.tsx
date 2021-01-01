@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import CheckoutItem from "../../components/checkout-item/checkout-item";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button";
 import { ICollectionItem } from "../../models/collections";
 import {
   selectCartItems,
@@ -40,6 +41,12 @@ function CheckoutPage({ cartItems, totalValue }: ICheckoutProps) {
       <div className="total">
         <span>TOTAL: ${totalValue}</span>
       </div>
+      <div className="test-warning">
+        *** PLEASE USE THIS FAKE DATA ***
+        <br />
+        4242 4242 4242 4242 - Exp: 01/22 - CVV: 123
+      </div>
+      <StripeCheckoutButton price={totalValue} />
     </div>
   );
 }
