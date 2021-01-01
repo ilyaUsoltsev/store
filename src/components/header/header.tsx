@@ -6,6 +6,8 @@ import "./header.scss";
 import { IRootState } from "../../redux/root-reducer";
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
 
 interface IHeaderProps {
   currentUser: any;
@@ -43,8 +45,8 @@ function Header({ currentUser, signOut, hidden }: IHeaderProps) {
 }
 
 const mapStateToProps = (state: IRootState) => ({
-  currentUser: state.user.currentUser,
-  hidden: state.cart.hidden,
+  currentUser: selectCurrentUser(state),
+  hidden: selectCartHidden(state),
 });
 
 export default connect(mapStateToProps)(Header);

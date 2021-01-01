@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { UserActionTypes } from "./redux/user/action-types";
 import { IRootState } from "./redux/root-reducer";
+import CheckoutPage from "./pages/checkout/checkout";
 
 interface IAppProps {
   currentUser?: ICurrentUser | null;
@@ -48,6 +49,7 @@ class App extends React.Component<IAppProps> {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
