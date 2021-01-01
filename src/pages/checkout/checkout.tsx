@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import CheckoutItem from "../../components/checkout-item/checkout-item";
 import { ICollectionItem } from "../../models/collections";
 import {
   selectCartItems,
@@ -33,7 +34,9 @@ function CheckoutPage({ cartItems, totalValue }: ICheckoutProps) {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((cartItem) => cartItem.name)}
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
       <div className="total">
         <span>TOTAL: ${totalValue}</span>
       </div>
