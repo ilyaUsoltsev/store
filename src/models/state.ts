@@ -6,6 +6,8 @@ export interface IStateDirectory {
 }
 export interface IStateShopPage {
   collections: { [x: string]: ICollection } | null;
+  isFetching: boolean;
+  errorMessage?: string;
 }
 
 export interface ISignInState {

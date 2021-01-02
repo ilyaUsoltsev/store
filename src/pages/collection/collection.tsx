@@ -15,6 +15,7 @@ interface ICollectionPage extends RouteComponentProps<MatchParams> {
 }
 
 const CollectionPage = ({ collection }: ICollectionPage) => {
+  console.log(collection, "collectionfa1!!!");
   return (
     <div className="collection-page">
       <h2 className="title">{collection?.title}</h2>
