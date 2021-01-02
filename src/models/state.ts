@@ -5,7 +5,7 @@ export interface IStateDirectory {
   sections: ISection[];
 }
 export interface IStateShopPage {
-  collections: { [x: string]: ICollection };
+  collections: { [x: string]: ICollection } | null;
 }
 
 export interface ISignInState {

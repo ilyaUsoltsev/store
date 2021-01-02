@@ -7,12 +7,14 @@ const selectShopCollection = (state: IRootState): IStateShopPage =>
 
 export const selectCollections = createSelector(
   [selectShopCollection],
-  (shop: IStateShopPage) => Object.values(shop.collections)
+  ({ collections }: IStateShopPage) =>
+    collections ? Object.values(collections!) : []
 );
 
 export const selectCollection = (collectionUrlParam: string) => {
   return createSelector(
     [selectShopCollection],
-    (shop: IStateShopPage) => shop.collections[collectionUrlParam]
+    ({ collections }: IStateShopPage) =>
+      collections ? collections![collectionUrlParam] : undefined
   );
 };

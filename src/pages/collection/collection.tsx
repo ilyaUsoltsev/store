@@ -20,7 +20,7 @@ const CollectionPage = ({ collection }: ICollectionPage) => {
       <h2 className="title">{collection?.title}</h2>
       <div className="items">
         {collection!.items.map((item) => (
-          <CollectionItem item={item} />
+          <CollectionItem item={item} key={item.id} />
         ))}
       </div>
     </div>
