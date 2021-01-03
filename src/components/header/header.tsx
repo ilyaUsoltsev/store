@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { connect } from "react-redux";
 import { IRootState } from "../../redux/root-reducer";
@@ -12,14 +12,16 @@ import {
   OptionLink,
   OptionsContainer,
 } from "./header.styles";
+import { UserActionTypes } from "../../redux/user/action-types";
+import { singOutStart } from "../../redux/user/user.actions";
 
 interface IHeaderProps {
-  currentUser: any;
-  hidden: boolean;
-  signOut: () => {};
+  currentUser?: any;
+  hidden?: boolean;
+  signOutStart?: () => {};
 }
 
-function Header({ currentUser, signOut, hidden }: IHeaderProps) {
+function Header({ currentUser, hidden, signOutStart }: IHeaderProps) {
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -29,7 +31,7 @@ function Header({ currentUser, signOut, hidden }: IHeaderProps) {
         <OptionLink to="/shop">SHOP</OptionLink>
         <OptionLink to="/shop">CONTACT</OptionLink>
         {currentUser ? (
-          <OptionLink as="div" onClick={signOut}>
+          <OptionLink as="div" onClick={() => signOutStart!()}>
             SIGN OUT
           </OptionLink>
         ) : (
@@ -42,9 +44,13 @@ function Header({ currentUser, signOut, hidden }: IHeaderProps) {
   );
 }
 
+const mapDispatchToProps = (dispatch: Dispatch<UserActionTypes>) => ({
+  signOutStart: () => dispatch(singOutStart()),
+});
+
 const mapStateToProps = (state: IRootState) => ({
   currentUser: selectCurrentUser(state),
   hidden: selectCartHidden(state),
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect<any>(mapStateToProps as any, mapDispatchToProps)(Header);

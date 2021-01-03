@@ -1,13 +1,22 @@
-import React, { Component, FormEvent } from "react";
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+import React, { Component, Dispatch, FormEvent } from "react";
+import { connect } from "react-redux";
+import { IEmailAndPassword } from "../../models/auth";
 import { ISignInState } from "../../models/state";
+import { UserActionTypes } from "../../redux/user/action-types";
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../redux/user/user.actions";
 import CustomButton from "../custom-button/custom-button";
 import FormInput from "../form-input/form-input";
 import "./sign-in.scss";
 
-interface IProps {}
+interface IProps {
+  googleSignInStart: () => {};
+  emailSignInStart: (x: IEmailAndPassword) => {};
+}
 
-export default class SignIn extends Component {
+class SignIn extends Component<IProps> {
   state: ISignInState;
 
   constructor(props: IProps) {
@@ -21,12 +30,7 @@ export default class SignIn extends Component {
   handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const { email, password } = this.state;
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
-    } catch (error) {
-      console.log(error.message);
-    }
+    this.props.emailSignInStart({ email, password });
   };
 
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -35,6 +39,7 @@ export default class SignIn extends Component {
   };
 
   render() {
+    const { googleSignInStart } = this.props;
     return (
       <div className="sign-in">
         <h2>I already have an account</h2>
@@ -60,7 +65,7 @@ export default class SignIn extends Component {
             <CustomButton type="submit">Sign in</CustomButton>
             <CustomButton
               type="button"
-              onClick={signInWithGoogle}
+              onClick={googleSignInStart}
               customClass="google-sign-in"
             >
               Sign in with Google
@@ -71,3 +76,11 @@ export default class SignIn extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch<UserActionTypes>) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (emailAndPassword: IEmailAndPassword) =>
+    dispatch(emailSignInStart(emailAndPassword)),
+});
+
+export default connect(undefined, mapDispatchToProps)(SignIn as any);

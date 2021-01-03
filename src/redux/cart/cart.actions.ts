@@ -5,10 +5,14 @@ import {
   REMOVE_CART_ITEM,
   CartActionTypes,
   CLEAR_ITEM_FROM_CART,
+  CLEAR_CART,
 } from "./action-types";
 
 export const toggleCartHidden = (): CartActionTypes => ({
   type: TOGGLE_CART_HIDDEN,
+});
+export const clearCartAction = (): CartActionTypes => ({
+  type: CLEAR_CART,
 });
 export const addCartItem = (cartItem: ICollectionItem): CartActionTypes => ({
   type: ADD_CART_ITEM,

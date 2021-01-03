@@ -17,6 +17,7 @@ export interface ISignInState {
 
 export interface IUserState {
   currentUser: ICurrentUser | null;
+  error?: string;
 }
 export interface ICartState {
   hidden: boolean;

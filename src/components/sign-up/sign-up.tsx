@@ -1,13 +1,21 @@
-import React, { Component, FormEvent } from "react";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import React, { Component, Dispatch, FormEvent } from "react";
+import { connect } from "react-redux";
 import { ISignUpState } from "../../models/state";
+import { UserActionTypes } from "../../redux/user/action-types";
+import { singUpStart } from "../../redux/user/user.actions";
 import CustomButton from "../custom-button/custom-button";
 import FormInput from "../form-input/form-input";
 import "./sign-up.scss";
 
-interface ISignUpProps {}
+interface ISignUpProps {
+  signUpWithEmailAndPassword?: (
+    email: string,
+    password: string,
+    displayName: string
+  ) => {};
+}
 
-export class SignUp extends Component {
+export class SignUp extends Component<ISignUpProps> {
   state: ISignUpState;
   constructor(props: ISignUpProps) {
     super(props);
@@ -26,21 +34,7 @@ export class SignUp extends Component {
       alert("Passwords aint the same!");
       return;
     }
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      this.setState({
-        email: "",
-        password: "",
-        displayName: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
+    this.props.signUpWithEmailAndPassword!(email, password, displayName);
   };
 
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -94,4 +88,12 @@ export class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch: Dispatch<UserActionTypes>) => ({
+  signUpWithEmailAndPassword: (
+    email: string,
+    password: string,
+    displayName: string
+  ) => dispatch(singUpStart({ email, password, displayName })),
+});
+
+export default connect<any>(null, mapDispatchToProps)(SignUp);
